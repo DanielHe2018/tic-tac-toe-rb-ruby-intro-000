@@ -54,11 +54,11 @@ def current_player(board)
 end
 
 def play(board)
-  turn_num = 0
-  while turn_num<9
+  until over?(board)
     turn(board)
-    turn_num+=1
   end
+  if won?(board)
+    puts "Congratulations #{winner(board)}!"
 end
 
 # Helper Methods
@@ -91,7 +91,7 @@ def turn(board)
   input = gets.strip
   index = input_to_index(input)
   if valid_move?(board, index)
-    move(board, index)
+    move(board, index, current_player(board))
     display_board(board)
   else
     turn(board)
